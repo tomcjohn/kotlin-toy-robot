@@ -12,10 +12,10 @@ class Robot (val position: Position, val direction: Direction){
 
     fun move(): Robot {
         return when (direction) {
-            Direction.NORTH -> Robot(Position(position.x, position.y), direction)
-            Direction.EAST -> Robot(Position(position.x, position.y), direction)
-            Direction.SOUTH -> Robot(Position(position.x, position.y), direction)
-            Direction.WEST -> Robot(Position(position.x, position.y), direction)
+            Direction.NORTH -> Robot(Position(position.x, position.y+1), direction)
+            Direction.EAST -> Robot(Position(position.x+1, position.y), direction)
+            Direction.SOUTH -> Robot(Position(position.x, position.y-1), direction)
+            Direction.WEST -> Robot(Position(position.x-1, position.y), direction)
         }
     }
 
