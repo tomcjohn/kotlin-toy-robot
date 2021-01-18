@@ -19,9 +19,10 @@ class Robot (val position: Position, val direction: Direction){
         }
     }
 
-    fun report() {
+    fun report(): Robot {
         // (2,4,North)
         println("($position.x,$position.y,$direction)")
+        return this
     }
 
     override fun toString(): String {
