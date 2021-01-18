@@ -1,2 +1,6 @@
-# idea project dir
+# idea project files
 .idea
+*.iml
+
+# kotlin target dir
+out
