@@ -21,7 +21,7 @@ class Robot (val position: Position, val direction: Direction){
 
     fun report(): Robot {
         // (2,4,North)
-        println("($position.x,$position.y,$direction)")
+        println("(${position.x},${position.y},$direction)")
         return this
     }
 
