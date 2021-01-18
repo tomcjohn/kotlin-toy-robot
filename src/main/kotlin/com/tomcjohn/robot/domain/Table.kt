@@ -1,23 +1,19 @@
 package com.tomcjohn.robot.domain
 
-class Table(val bottomLeft: Position, val topRight: Position) {
+class Table(private val bottomLeft: Position, private val topRight: Position) {
 
     fun doCommand(cmd: String, robot: Robot?): Robot? {
         val splitCmd = cmd.split(" ")
 
         if (robot == null) {
-            if (splitCmd[0] == "PLACE") {
+            return if (splitCmd[0] == "PLACE") {
                 val placeArgs = splitCmd[1].split(",")
                 val newPos = Position(placeArgs[0].toInt(), placeArgs[1].toInt())
                 val newDir = Direction.valueOf(placeArgs[2])
                 val newRobot = Robot(newPos, newDir)
-                if (onTable(newRobot)) {
-                    return newRobot
-                } else {
-                    return robot
-                }
+                if (onTable(newRobot)) newRobot else robot
             } else {
-                return robot
+                robot
             }
         } else {
             return when (splitCmd[0]) {
@@ -26,19 +22,18 @@ class Table(val bottomLeft: Position, val topRight: Position) {
                     val newPos = Position(placeArgs[0].toInt(), placeArgs[1].toInt())
                     val newDir = Direction.valueOf(placeArgs[2])
                     val newRobot = Robot(newPos, newDir)
-                    if (onTable(newRobot)) {
-                        return newRobot
-                    } else {
-                        return robot
-                    }
+                    if (onTable(newRobot)) newRobot else robot
                 }
-                "MOVE" -> robot.move()
+                "MOVE" -> {
+                    val newRobot = robot.move()
+                    if (onTable(newRobot)) newRobot else robot
+                }
                 "LEFT" -> robot.left()
                 "RIGHT" -> robot.right()
                 "REPORT" -> robot.report()
 
                 else -> {
-                    println("Unrecognised command: " + cmd)
+                    println("Unrecognised command: $cmd")
                     robot
                 }
             }

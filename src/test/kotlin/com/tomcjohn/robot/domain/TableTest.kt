@@ -42,6 +42,19 @@ class TableTest {
     }
 
     @Test
+    fun testMoveOffTable() {
+        val table = Table(Position(0, 0), Position(9, 9))
+
+        val position = Position(9, 9)
+        val direction = NORTH
+        val robot = Robot(position, direction)
+        val newRobot = table.doCommand("MOVE", robot)
+        assertNotNull(newRobot!!)
+        assertEquals(position, newRobot.position)
+        assertEquals(direction, newRobot.direction)
+    }
+
+    @Test
     fun testLeft() {
         val table = Table(Position(0, 0), Position(9, 9))
 
